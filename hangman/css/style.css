@@ -1,0 +1,226 @@
+body {
+    background: #037c97;
+}
+
+.container {
+    margin: auto;
+    width:980px;
+}
+
+img {
+    position: absolute;
+    width:50%;
+    top:10px;
+    left: 460px;
+}
+
+.spacer {
+    margin: 200px;
+}
+
+.parag {
+    font-size: 24px;
+    color: #FFF;
+}
+
+#category {
+    color: #F00;
+    font-weight: bold;
+}
+
+#gameBox{
+    box-sizing: border-box;
+    padding: 50px;
+    width: 700px;
+    height: 153px;
+    border: 1px solid;
+    background: #EEE;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 25px;
+}
+
+#gameBox .wrap {
+    margin-right: 15px;
+}
+
+.userBubble {
+    width: 40px;
+    height: 40px;
+    background: #FF0;
+    border: 1px solid #000;
+    margin: 1px;
+    border-radius: 29%;
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: 'Concert One', cursive;
+}
+
+.lives , #wrongLetters{
+    position: relative;
+    width:700px;
+    height: 100px;
+    margin-top: 20px;
+    background: #EEE;
+    display: flex;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+.boxAlign {
+    margin-top: 29px;
+    background: #e9610e;
+}
+
+.lives i{
+    color: #096b42;
+    font-size: 55px;
+    text-shadow: 3px 2px 5px #000;
+    margin-top: 17px;
+}
+
+.red {
+    color: #e9610e!important;
+    animation: bounce 0.5s;
+}
+ 
+.hide {
+    visibility: hidden;
+    display: block;
+}
+
+.win, .lose {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.425);
+    
+}
+
+
+.animation {
+    animation: popout 0.5s 0.5s infinite
+
+}
+
+.win .stripe {
+    width: 125vw;
+    height: 14vh;
+    background: rgb(126, 2, 2);
+    position: absolute;
+    top: 40vh;
+    left: -10vw;
+    transform: rotate(-13deg);
+    border-top: 3px solid rgb(146, 72, 64);
+    border-bottom: 3px solid rgb(146, 72, 64);
+    transition: 0.5s;
+}
+
+.slide {
+    animation: slide 1s;
+}
+
+.hidden{
+    display:none;
+}
+
+.win .winText {
+    font-family: 'Bangers', cursive;
+    position: relative;
+    left: 25vw;
+    font-size: 225px;
+    text-shadow: -5px 5px 5px #000;
+    -webkit-text-stroke: 5px #9aab0d;
+}
+
+.v1 {top:42vh; }
+.v2 {top:39vh; }
+.v3 {top:36vh; }
+.v4 {top:32vh; }
+.v5 {top:29vh; }
+.v6 {top:26vh; }
+
+#losing {
+    background: rgba(0, 0, 0, 0.9)
+}
+
+.ScaryFont {
+    font-family: 'Butcherman', cursive;
+    font-size: 150px;
+    position: absolute;
+    top: 30vh;
+    left: 45vh;
+    text-shadow: -5px 5px 5px #000;
+    -webkit-text-stroke: 5px #ab180d;
+}
+
+.fadeIn {
+    animation: fadein 2s
+}
+
+#winning .fas, #losing .fas  {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    color: #1167b2;
+    font-size: 50px;
+    animation: rotate 1s infinite;
+
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+        transform: translateY(0px);
+    }
+    35% {
+        transform: scale(1.5);
+        transform: translateY(-10px);
+    }
+    65% {
+        transform: scale(1);
+        transform: translateY(0px);
+    }
+    75%{
+        transform: scale(1.2);
+        transform: translateY(-5px);
+    }
+    100%{
+        transform: scale(1);
+        transform: translateY(0px);
+    }
+
+}
+
+@keyframes popout {
+    0% {transform: scale(1);}
+    75% {transform: scale(1.05);}
+    100% {transform: scale(1);}
+}
+
+@keyframes slide {
+    0% {opacity: 0}
+    100%{opacity: 100%}   
+}
+
+@keyframes fadein {
+    0% {opacity: 0;
+        transform: scale(0.7)}
+    100%{opacity: 100%;
+        transform: scale(1)}   
+}
+
+@keyframes rotate {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+    
+}
+
+
+
