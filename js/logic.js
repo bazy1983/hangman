@@ -1,4 +1,4 @@
-var categoryArray = ["Car make", "Fruit", "Country", "Female Celebrity", "Male Celebrity", "Animal", "Common phrases"],
+var categoryArray = ["Car make", "Fruit", "Country", "Female Celebrity", "Male Celebrity", "Animal", "Common phrase", "Song title"],
     itemArray = [
         ["Lamborghini", "Volkswagen", "General Motors", "Aston Martin", "Chevrolet", "Renault", "Tesla"],
         ["Cranberry", "Avocado", "Cantaloupe", "Lemon", "Papaya", "Watermelon", "Apricot"],
@@ -6,7 +6,8 @@ var categoryArray = ["Car make", "Fruit", "Country", "Female Celebrity", "Male C
         ["Angelina Jolie", "Oprah Winfrey", "Megan Fox", "Rihanna", "Salma Hayek", "Charlize Theron", "Halle Berry"],
         ["Johnny Depp", "Brad Pitt", "Will Smith", "Hugh Jackman", "George Clooney", "Morgan Freeman", "Gabriel Iglesias"],
         ["Jellyfish", "Alligator", "Chameleon", "Hammerhead shark", "Koala", "Weasel", "Woodpecker"],
-        ["Back to Square One", "A Piece of Cake", "Down To Earth", "clean as a whistle", "It's Not Rocket Science", "Making a Scene", "Needle In a Haystack"]
+        ["Back to Square One", "A Piece of Cake", "Down To Earth", "clean as a whistle", "It's Not Rocket Science", "Making a Scene", "Needle In a Haystack"],
+        ["Thriller", "I Wanna Dance With Somebody", "Baby One More Time", "Like a Prayer", "When Doves Cry", "Rolling in the Deep", "Call Me Maybe"]
     ],
     wrongInput = [], //to store user wrong inputs
     matchInput = [], //to store matching letters
@@ -15,8 +16,8 @@ var categoryArray = ["Car make", "Fruit", "Country", "Female Celebrity", "Male C
     computerThink = categoryArray[randomCat],
     computerPick = itemArray[randomCat][randomItem],
     wordContainer,
-    winCount = 0, //this will prevent the system from excuting win instructions after winning
-    loseCount = 0, // this will prevent the system from excuting lose instructions after losing
+    winCount = 0, //this will prevent the system from excuting win instructions after game is over
+    loseCount = 0, // this will prevent the system from excuting lose instructions after game is over
     attempts = 9,
     //choiceArray will store chosen phrases into seperate words
     choiceArray = computerPick.toLowerCase().split(" "),
@@ -50,20 +51,7 @@ choiceArray.forEach(function(value){// loops through all items in the array
     //creating wrap div inside of #gamebox div
     document.getElementById("gameBox").appendChild(div1);
 });
-/*
-            
-    =======>>        "my name is Mohammed".replace(/\s/g , "")
-            
-            */
 
-
-/* 
-//this will create <div> w/ style for each letter of computerPick
-for(var i = 0; i <computerPick.length; i++) { 
-    var ele = document.createElement("div");
-    ele.className = "userBubble";
-    document.getElementById("gameBox").appendChild(ele);
-}*/
 
 //this will change star color that represent user remaining attempts
 function starAttempt(x) {
@@ -71,63 +59,60 @@ function starAttempt(x) {
     star[x].classList.add("red");
 };
 
-/* 
-//this will hide <div> boxes to match space between words
-for(var i = 0; i <computerPick.length; i++) { 
-    if (computerPick[i] === " ") {
-        document.getElementsByClassName("userBubble")[i].className += " hide";
-    }
-}*/
-
 
 //(event.keyCode >= 65 && event.keyCode <= 90)
 
 
 document.onkeyup = function (event) {
-    var keyValue = event.key.toLowerCase(), //capture user input
-        wordLowerNoSpaces = computerPick.toLowerCase() 
-        wordIndex = wordLowerNoSpaces.indexOf(keyValue);
-     var audio = new Audio('./media/stroke.wav');
-    audio.play();
 
-    if (attempts >=0){
-            //loops through all the characters 
-            // if key pressed matches letters in computerPick it will store 
-            // key value to the div of the same index
-        for(var x = 0; x < wordLowerNoSpaces.length; x++) {
-            if (wordLowerNoSpaces[x] == keyValue) {
-                console.log(x);
-                document.getElementsByClassName("userBubble")[x].textContent = keyValue;
-                matchInput[x] = keyValue //this will build array of all matching characters 
-
-                 // if any wrong key pressed for first time and not found in the original word
-            } else if (wrongInput.indexOf(keyValue) == -1 && wordLowerNoSpaces.indexOf(keyValue) == -1) { 
-                   
-                wrongInput.push(keyValue);
-
-                //this will create div w/ style and the wrong character
-                var ele = document.createElement("div");
-                ele.className = "userBubble boxAlign";
-                ele.textContent = keyValue;
-                document.getElementById("wrongLetters").appendChild(ele);
-
-                //excute this function to change star color
-                
-                starAttempt(attempts);
-                attempts--;
-                    
-                };
-        };
-    } else { //losing the game
-        document.getElementById("losing").classList.toggle("hidden");
-        document.getElementById("losingText").classList.toggle("fadeIn");
-        var audio = new Audio('./media/fail.mp3');
+    //the code will work only if the key is alphabetic character and user haven't won or lost the game
+    if (event.keyCode >= 65 && event.keyCode <= 90 && loseCount === 0 && winCount ===0) {
+        var keyValue = event.key.toLowerCase(), //capture user input 
+            wordIndex = wordLowerNoSpaces.indexOf(keyValue);
+        var audio = new Audio('./media/stroke.wav');
         audio.play();
+
+        if (attempts >=0){
+                //loops through all the characters 
+                // if key pressed matches letters in computerPick it will store 
+                // key value to the div of the same index
+            for(var x = 0; x < wordLowerNoSpaces.length; x++) {
+                if (wordLowerNoSpaces[x] == keyValue) {
+                    console.log(x);
+                    document.getElementsByClassName("userBubble")[x].textContent = keyValue;
+                    matchInput[x] = keyValue //this will build array of all matching characters 
+
+                    // if any wrong key pressed for first time and not found in the original word
+                } else if (wrongInput.indexOf(keyValue) == -1 && wordLowerNoSpaces.indexOf(keyValue) == -1) { 
+                    
+                    wrongInput.push(keyValue);
+
+                    //this will create div w/ style and the wrong character
+                    var ele = document.createElement("div");
+                    ele.className = "userBubble boxAlign";
+                    ele.textContent = keyValue;
+                    document.getElementById("wrongLetters").appendChild(ele);
+
+                    //excute this function to change star color
+                    
+                    starAttempt(attempts);
+                    attempts--;
+                        
+                    };
+            };
+        } else { //losing the game
+                document.getElementById("losing").classList.toggle("hidden");
+                document.getElementById("losingText").classList.toggle("fadeIn");
+                var audio = new Audio('./media/fail.mp3');
+                audio.play();
+                winCount ++
+                loseCount ++
+        };
+
+
+        console.log(matchInput);
+        matchChecker()
     };
-
-
-    console.log(matchInput);
-    matchChecker()
 };
  
 // will build a word from matchInput array and matches it to original word
@@ -139,7 +124,7 @@ function matchChecker (){
         }
     };
     console.log("testing: " + wordContainer);
-    if (wordContainer === wordLowerNoSpaces && winCount == 0){
+    if (wordContainer === wordLowerNoSpaces){
         // Winning the game
         document.getElementById("winning").classList.toggle("hidden");
         document.getElementById("stripe").classList.toggle("slide");
@@ -149,7 +134,7 @@ function matchChecker (){
         loseCount = 1;
     };
 }
-var audio = new Audio('./media/start.wav');
+var audio = new Audio('./media/start.ogg');
         audio.play();
 
 function reset() {

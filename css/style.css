@@ -26,11 +26,12 @@ img {
 #category {
     color: #F00;
     font-weight: bold;
+    text-shadow: 0 0 20px;
 }
 
 #gameBox{
     box-sizing: border-box;
-    padding: 50px;
+    padding: 38px;
     width: 700px;
     height: 153px;
     border: 1px solid;
