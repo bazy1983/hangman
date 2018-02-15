@@ -9,6 +9,12 @@ var categoryArray = ["Car make", "Fruit", "Country", "Female Celebrity", "Male C
         ["Back to Square One", "A Piece of Cake", "Down To Earth", "clean as a whistle", "It's Not Rocket Science", "Making a Scene", "Needle In a Haystack"],
         ["Thriller", "I Wanna Dance With Somebody", "Baby One More Time", "Like a Prayer", "When Doves Cry", "Rolling in the Deep", "Call Me Maybe"]
     ],
+    informationBubble = {
+        helloStatement : "Hello, I'm your Information bubble, I'm your friend!",
+        correctGuess: ["Awesome!", "Good job!", "Nicely done!"],
+        wrongGuess: ["It's Okay, try again", "Oops!", "Things happen, you know!"],
+        invalidKey: " is invalid input!"
+    },
     wrongInput = [], //to store user wrong inputs
     matchInput = [], //to store matching letters
     randomCat = Math.floor(Math.random()*categoryArray.length),
@@ -16,8 +22,7 @@ var categoryArray = ["Car make", "Fruit", "Country", "Female Celebrity", "Male C
     computerThink = categoryArray[randomCat],
     computerPick = itemArray[randomCat][randomItem],
     wordContainer,
-    winCount = 0, //this will prevent the system from excuting win instructions after game is over
-    loseCount = 0, // this will prevent the system from excuting lose instructions after game is over
+    gameResume = true //this will make the game keep going until it's over then will prevent logic from taking more inputs
     attempts = 9,
     //choiceArray will store chosen phrases into seperate words
     choiceArray = computerPick.toLowerCase().split(" "),
@@ -25,14 +30,7 @@ var categoryArray = ["Car make", "Fruit", "Country", "Female Celebrity", "Male C
     
 
 
-console.log( computerThink + "; " + randomItem + "; "+ computerPick);
-console.log( computerThink + "; " + wordLowerNoSpaces.replace(" ", "").toLowerCase());
-
 document.getElementById ("category").textContent = computerThink; // output category item on top of screen
-
-
-
-
 
 
 choiceArray.forEach(function(value){// loops through all items in the array
@@ -44,9 +42,9 @@ choiceArray.forEach(function(value){// loops through all items in the array
 
     //this will make div box for each character inside wrap div
     for(var i = 0; i < value.length; i++){
-            var div2 = document.createElement('div');
-            div2.className = "userBubble";
-            div1.appendChild(div2); 
+        var div2 = document.createElement('div');
+        div2.className = "userBubble";
+        div1.appendChild(div2); 
     };
     //creating wrap div inside of #gamebox div
     document.getElementById("gameBox").appendChild(div1);
@@ -66,7 +64,7 @@ function starAttempt(x) {
 document.onkeyup = function (event) {
 
     //the code will work only if the key is alphabetic character and user haven't won or lost the game
-    if (event.keyCode >= 65 && event.keyCode <= 90 && loseCount === 0 && winCount ===0) {
+    if (event.keyCode >= 65 && event.keyCode <= 90 && gameResume || event.keyCode ===222) {
         var keyValue = event.key.toLowerCase(), //capture user input 
             wordIndex = wordLowerNoSpaces.indexOf(keyValue);
         var audio = new Audio('./media/stroke.wav');
@@ -78,10 +76,10 @@ document.onkeyup = function (event) {
                 // key value to the div of the same index
             for(var x = 0; x < wordLowerNoSpaces.length; x++) {
                 if (wordLowerNoSpaces[x] == keyValue) {
-                    console.log(x);
                     document.getElementsByClassName("userBubble")[x].textContent = keyValue;
                     matchInput[x] = keyValue //this will build array of all matching characters 
-
+                    var y = Math.floor(Math.random()*3);
+                    informationfunction(informationBubble.correctGuess[y]);
                     // if any wrong key pressed for first time and not found in the original word
                 } else if (wrongInput.indexOf(keyValue) == -1 && wordLowerNoSpaces.indexOf(keyValue) == -1) { 
                     
@@ -92,7 +90,8 @@ document.onkeyup = function (event) {
                     ele.className = "userBubble boxAlign";
                     ele.textContent = keyValue;
                     document.getElementById("wrongLetters").appendChild(ele);
-
+                    var y = Math.floor(Math.random()*3);
+                    informationfunction(informationBubble.wrongGuess[y]);
                     //excute this function to change star color
                     
                     starAttempt(attempts);
@@ -100,18 +99,19 @@ document.onkeyup = function (event) {
                         
                     };
             };
-        } else { //losing the game
+        } else { //LOSING the game
                 document.getElementById("losing").classList.toggle("hidden");
                 document.getElementById("losingText").classList.toggle("fadeIn");
                 var audio = new Audio('./media/fail.mp3');
                 audio.play();
-                winCount ++
-                loseCount ++
+                gameResume = false;
+                document.getElementById("info").classList.add("hidden");
         };
 
-
-        console.log(matchInput);
         matchChecker()
+    } else { // information bubble will display invalid input message
+        var invalidInfo = event.key + informationBubble.invalidKey;
+        informationfunction(invalidInfo);
     };
 };
  
@@ -121,17 +121,18 @@ function matchChecker (){
     for (var i = 0; i <matchInput.length; i++){
         if (matchInput[i] != undefined){ // this will remove empty values in the array
             wordContainer += matchInput[i];
-        }
+        };
     };
-    console.log("testing: " + wordContainer);
+
+
     if (wordContainer === wordLowerNoSpaces){
-        // Winning the game
+        // WINNING the game
         document.getElementById("winning").classList.toggle("hidden");
         document.getElementById("stripe").classList.toggle("slide");
         var audio = new Audio('./media/tada.mp3');
         audio.play();
-        winCount = 1;
-        loseCount = 1;
+        gameResume = false;
+        document.getElementById("info").classList.add("hidden");
     };
 }
 var audio = new Audio('./media/start.ogg');
@@ -141,7 +142,13 @@ function reset() {
     window.location.reload()
 }
 
+function informationfunction(text) {
+    
+    document.getElementById("informationBubble").classList.add("expandWidth");
+    setTimeout (function(){document.getElementById("informationBubble").classList.remove("expandWidth"); }, 3500)
+    document.getElementById("informationText").textContent = text;
+};
 
-
+informationfunction(informationBubble.helloStatement);
 
 
