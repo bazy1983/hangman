@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">    <!-- winning font -->
-    <link href="https://fonts.googleapis.com/css?family=Butcherman" rel="stylesheet"> <!-- losing font -->
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <!-- winning font -->
+    <link href="https://fonts.googleapis.com/css?family=Butcherman" rel="stylesheet">
+    <!-- losing font -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
@@ -20,7 +22,8 @@
         <p class="parag">The computer is thinking of ...
             <span id="category"></span>
         </p>
-        <div id="gameBox"></div><!-- container for guessing the letters-->
+        <div id="gameBox"></div>
+        <!-- container for guessing the letters-->
 
         <!-- this will show stars that represent player's attempts -->
         <div class="lives">
@@ -39,39 +42,45 @@
         <div id="wrongLetters"></div>
 
         <!-- this will show up when winning the game -->
-        <div id = "winning" class="win hidden">
-            <div id = "stripe" class="stripe"></div>
-            <div class = "animation">
+        <div id="winning" class="win hidden">
+            <div id="stripe" class="stripe"></div>
+            <div class="animation">
                 <span class="winText v1">Y</span>
                 <span class="winText v2">O</span>
                 <span class="winText v3">U</span>
                 <span class="winText">&nbsp;</span>
                 <span class="winText v4">W</span>
                 <span class="winText v5">O</span>
-                <span class="winText v6">N</span> 
+                <span class="winText v6">N</span>
             </div>
-            <div><i id = "resetWin" onclick = "reset()" class="fas fa-sync"></i></div>
+            <div>
+                <i id="resetWin" onclick="reset()" class="fas fa-sync"></i>
+            </div>
         </div>
 
         <!-- this will show up when losing the game -->
-        <div id = "losing" class="lose hidden">
-                
-                <div id = "losingText" class = "ScaryFont">
-                    You Lost
-                </div>
-                <div><i  id = "resetLost" onclick = "reset()" class="fas fa-sync"></i></div>
-            </div>
+        <div id="losing" class="lose hidden">
 
-        <div id = "info" class="pulsatingButton" onclick="informationfunction()">
-            <i class="fas fa-info-circle"></i>
-            <div id="informationBubble">
-                <span id = "informationText"></span> 
+            <div id="losingText" class="ScaryFont">
+                You Lost
+            </div>
+            <div>
+                <i id="resetLost" onclick="reset()" class="fas fa-sync"></i>
             </div>
         </div>
-        
+
+
+        <!-- Information Bubble -->
+        <div id="info" class="pulsatingButton" onclick="informationfunction('I will display information when needed')">
+            <i class="fas fa-info-circle"></i>
+            <div id="informationBubble">
+                <span id="informationText"></span>
+            </div>
+        </div>
+
     </div>
 
-   
+
     <script type="text/javascript" src="./js/logic.js"></script>
 </body>
 

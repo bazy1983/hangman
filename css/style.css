@@ -61,6 +61,7 @@ img {
     font-family: 'Concert One', cursive;
 }
 
+/* Stars and wrong guess boxes */
 .lives , #wrongLetters{
     position: relative;
     width:700px;
@@ -84,6 +85,7 @@ img {
     margin-top: 17px;
 }
 
+/* changes the star color after losing an attempt */
 .red {
     color: #e9610e!important;
     animation: bounce 0.5s;
@@ -94,6 +96,7 @@ img {
     display: block;
 }
 
+/* end of game message */
 .win, .lose {
     position: fixed;
     top:0;
@@ -151,6 +154,7 @@ img {
     background: rgba(0, 0, 0, 0.9)
 }
 
+/* font used for YOU LOST at end of game */ 
 .ScaryFont {
     font-family: 'Butcherman', cursive;
     font-size: 150px;
@@ -248,7 +252,7 @@ img {
     position: relative;
     margin-left: 70px;
     background: #000;
-    width: 400px;
+    width: 500px;
     height: 34px;
     border-radius: 10px;
     transition: 0.7s;
@@ -258,7 +262,7 @@ img {
 }
 
 #informationBubble #informationText {
-    width: 447px;
+    width: 500px;
     color: #FFF;
     padding: 7px 0 0 10px;
     font-size: 17px;
@@ -297,11 +301,11 @@ img {
         opacity: 0;
     }
     20%{
-        width: 400px;
+        width: 600px;
         opacity: 1;
     }
     90%{
-        width: 400px;
+        width: 600px;
         opacity: 1;
     }
     100%{
