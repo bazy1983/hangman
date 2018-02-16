@@ -152,9 +152,7 @@ function informationfunction(text) {
 
 informationfunction(informationBubble.helloStatement);
 
-setTimeout(function() {
-    document.getElementById("informationBubble").classList.add("expandWidth");
-    setTimeout (function(){document.getElementById("informationBubble").classList.remove("expandWidth"); }, 3500)
-    document.getElementById("informationText").textContent = informationBubble.note;
+setTimeout(function() { 
+    informationfunction(informationBubble.note)
 }, 4000);
 
